@@ -1,0 +1,33 @@
+void insert_binary_free(binary_free*& root, int data) {//дерево без повтроряющихся данных
+	if (root == nullptr) {
+		root = Node_insert(data);
+	}
+	else {
+		binary_free* Node_secondary = Node_insert(data);
+		binary_free* temp = root;
+		while (temp) {
+			if (Node_secondary->info > temp->info) {
+				if (temp->right == nullptr) {
+					Node_secondary->parent = temp;
+					temp->right = Node_secondary;
+					break;
+				}
+				else {
+					temp = temp->right;
+				}
+			}
+			else {
+				if (Node_secondary->info < temp->info) {
+					if (temp->left == nullptr) {
+						Node_secondary->parent = temp;
+						temp->left = Node_secondary;
+						break;
+					}
+					else {
+						temp = temp->left;
+					}
+				}
+			}
+		}
+	}
+}
